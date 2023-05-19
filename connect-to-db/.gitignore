@@ -1,0 +1,4 @@
+node_modules
+logs
+# I am removing the .env file so that it submits it to github
+# .env
