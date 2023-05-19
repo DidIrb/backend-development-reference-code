@@ -1,12 +1,27 @@
 <!-- REFERENCE CODE FOR DEVELOPING OUR BACKEND USING JAVASCRIPT -->
-### REFERENCE CODE.
-Creating a repository that will contain code that will facilitate in the development of a complex backend application using javascript
-We are going to use Express, sequelize and mysql for this.
+# REFERENCE.
+Creating a repository that will contain code that will facilitate in the development of a complex backend application using javascript, this code can be used as a guide and used for reference.
 
-### TOPICS TO FOCUS ON.
+Guidance on how to use it, This repository has 3 branches.
 
-- [x] Initialize our Git repository.
-- [x] Making an express application.
-- [x] Connecting to MySQL Database using .sequelize & Protecting our env-variables
-- [ ] cross Origin Resource Sharing.
-- [ ] Logging stuff in a log file.
+- Master
+- Reference-series
+- Test-series
+
+# LIBRARIES USED
+- SEQUELIZE
+- EXPRESS
+
+## DATABASE USED
+- MYSQL
+
+# HOW TO USE THIS CODE
+Clone the starter pack repository using 
+- git clone {link}
+you can refer to the code online in git or clone the reference series branch and use it as a reference point. using the command git clone refer to this article for more details {https://www.freecodecamp.org/news/git-clone-branch-how-to-clone-a-specific-branch/}
+
+
+Install the necessary dependencies by using 
+- npm install
+
+Create a .env file and store your environment variables there
