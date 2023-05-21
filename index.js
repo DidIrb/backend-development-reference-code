@@ -7,7 +7,8 @@ import cors from "cors"
 import logger from "./middleware/logger.js";
 import corsOptions from "./config/corsOptions.js";
 import errorHandler from "./middleware/errorHandler.js";
-import UserTableSync from "./models/user.js";
+import { db } from "./config/dbConn.js";
+import UserRoute  from "./routes/user.routes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,6 +26,11 @@ app.use(cors(corsOptions));
 // HANDLING REQUESTS MADE TO DIFFERENT PATHS
 app.use("/", express.static(path.join(__dirname, "/public")));
 app.use("/", root);
+
+
+// using the default app function
+// userRoute(); 
+app.use("/api/users", UserRoute);
 
 app.all("*", (req, res) => {
   res.status(404);
@@ -44,4 +50,14 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 // SEQUELIZE FUNCTIONS
 connectDB();
-UserTableSync();
+
+// Sync
+db.conn
+  .sync({ alter: true })
+  .then(() => {
+    console.log("Synced db.");
+  })
+  .catch((err) => {
+    console.log("Failed to sync db: " + err.message);
+  });
+

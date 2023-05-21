@@ -2,6 +2,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import Sequelize from "sequelize";
+import Users from '../models/user.js';
 const env = process.env
 
 const pool = {
@@ -24,8 +25,13 @@ const sequelize = new Sequelize(env.DB, env.DB_USER, env.DB_PASSWORD, {
 
 export const db = {
     conn: sequelize,
-    Sequelize: Sequelize
+    Sequelize: Sequelize,
 }
+
+// This returns the model
+export const models =  {
+   Users : Users(),
+} 
 
 const connectDB = async () => {
     try{
@@ -35,5 +41,6 @@ const connectDB = async () => {
         console.error('Unable to connect to the database:', err);
     }
 }
+
 
 export default connectDB;
