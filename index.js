@@ -9,6 +9,7 @@ import corsOptions from "./config/corsOptions.js";
 import errorHandler from "./middleware/errorHandler.js";
 import { db } from "./config/dbConn.js";
 import UserRoute  from "./routes/user.routes.js";
+import CommentsRoute from "./routes/comment.routes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -31,6 +32,9 @@ app.use("/", root);
 // using the default app function
 // userRoute(); 
 app.use("/api/users", UserRoute);
+
+// Testing one to many relationship
+app.use("/api/comments", CommentsRoute);
 
 app.all("*", (req, res) => {
   res.status(404);

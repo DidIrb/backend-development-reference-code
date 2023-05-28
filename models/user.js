@@ -10,16 +10,9 @@ const Users = () => {
   const Users = db.conn.define(
     "user",
     {
-      user_id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
       username: {
         type: DataTypes.STRING,
         allowNull: false,
-        // You can use different types of validator
-        // validate: { len: [4, 6], },
       },
       password: {
         type: DataTypes.STRING,
@@ -29,11 +22,6 @@ const Users = () => {
         defaultValue: 21,
       },
     },
-    {
-      // CUSTOMIZING TABLES
-      freezeTableName: true,
-      timestamps: false,
-    }
   );
 
   return Users;

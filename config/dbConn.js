@@ -2,7 +2,11 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import Sequelize from "sequelize";
+
+// Importing Models
 import Users from '../models/user.js';
+import Comment from '../models/comment.js';
+
 const env = process.env
 
 const pool = {
@@ -31,7 +35,16 @@ export const db = {
 // This returns the model
 export const models =  {
    Users : Users(),
+   comments: Comment()
 } 
+
+// Setting the relationship Move this later to another file
+models.Users.hasMany(models.comments, { as: "comments" });
+models.comments.belongsTo(models.Users, {
+    foreignKey: "userId",
+    as: "user",
+});
+
 
 const connectDB = async () => {
     try{
@@ -41,6 +54,9 @@ const connectDB = async () => {
         console.error('Unable to connect to the database:', err);
     }
 }
+
+// Adding the relationship here for now for testing
+
 
 
 export default connectDB;

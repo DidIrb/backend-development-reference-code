@@ -1,8 +1,7 @@
 // Making requests when the route is called
-import { deleteUser, deleteAll, update, findOne, findAllPublished, findAll, create } from "../controllers/usersController.js";
+import { deleteUser, deleteAll, update, findOne, findAll, create } from "../controllers/usersController.js";
 import express from "express";
 
-const app = express();
 const router = express.Router();
 
   // Create a new User
@@ -10,9 +9,6 @@ const router = express.Router();
 
   // Retrieve all Users
   router.get("/", findAll);
-
-  // Retrieve all published Users
-  router.get("/published", findAllPublished);
 
   // Retrieve a single User with id
   router.get("/:id", findOne);
