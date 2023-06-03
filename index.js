@@ -1,58 +1,39 @@
 import express from "express";
-import path from 'path';
-import { fileURLToPath } from 'url';
 import connectDB from "./config/dbConn.js";
-import root from "./routes/root.js";
-import cors from "cors"
-import logger from "./middleware/logger.js";
-import corsOptions from "./config/corsOptions.js";
-import errorHandler from "./middleware/errorHandler.js";
-import { db } from "./config/dbConn.js";
-import UserRoute  from "./routes/user.routes.js";
-import CommentsRoute from "./routes/comment.routes.js";
+import root from "./routes/root.route.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import { db } from "./config/dbConn.js";
+// Importing the routes to handle the requests
+import birthCertRoutes from "./routes/birthCert.routes.js";
+import personRoutes from "./routes/person.routes.js";
+
 const PORT = process.env.PORT || 3500;
 const app = express();
-
-app.use(logger);
 
 // Handling JSON
 app.use(express.json());
 
-// CORS
-app.use(cors(corsOptions));
-
 // HANDLING REQUESTS MADE TO DIFFERENT PATHS
-app.use("/", express.static(path.join(__dirname, "/public")));
 app.use("/", root);
 
-
 // using the default app function
-// userRoute(); 
-app.use("/api/users", UserRoute);
+app.use("/api/birthCert", birthCertRoutes);
+app.use("/api/persons", personRoutes);
 
-// Testing one to many relationship
-app.use("/api/comments", CommentsRoute);
+
+
 
 app.all("*", (req, res) => {
   res.status(404);
-  if (req.accepts("html")) {
-    res.sendFile(path.join(__dirname, "views", "404.html"));
-  } else if (req.accepts("json")) {
+  if (req.accepts("json")) {
     res.json({ message: "404 Not Found" });
   } else {
     res.type("txt").send("404 Not Found");
   }
 });
 
-// USING THE ERROR HANDLER MIDDLEWARE
-app.use(errorHandler);
-
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
-// SEQUELIZE FUNCTIONS
 connectDB();
 
 // Sync
