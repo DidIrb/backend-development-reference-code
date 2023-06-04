@@ -1,29 +1,27 @@
 <!-- REFERENCE CODE FOR DEVELOPING OUR BACKEND USING JAVASCRIPT -->
-# REFERENCE.
-Creating a repository that will contain code that will facilitate in the development of a complex backend application using javascript, this code can be used as a guide or as a reference point.
+# One to One relationships.
+When working with relational databases we need to specify the type of relationship in this specific instance we are working with 
+a one to one relationship 
 
-Guidance on how to use it, This repository has 3 branches.
+### Tables used in this reference 
+Persons and Birth Certificates
+a person can only have one birth certificate and an individual birth Certificate can only belong to one person
+we are using the 
 
-- Master
-- Reference-series
-- Test-series
+hasOne and belongsTo methods to define the relationship between the two tables
 
-# LIBRARIES USED
-- SEQUELIZE
-- EXPRESS
-
-## DATABASE USED
-- MYSQL
-
-# HOW TO USE THIS CODE
-Clone the starter code from master brach in this repository using the command
-- git clone {link}
-- download the code directly by clicking the code button.
-
-you can refer to the code online in git or clone the reference series branch and use it as a reference point. using the command git clone refer to this article for more details {https://www.freecodecamp.org/news/git-clone-branch-how-to-clone-a-specific-branch/}
+##### The process of creating the relationship
+- define the models {Person, BirthCert}
+- import it into our dbConn.js file.
+- define the relationship by writhing
+    - parent.hasOne(child) - person.hasOne(birthCert)
+        - helper methods set,get,createParent is enabled
+    - child.belongsTo(parent) - birthCert.belongsTo(person)
+        - helper methods set,get,createChild is enabled
+- sequelize.sync - sync with the database
+- create the controllers birthCert Controller and Person Controller and create functions to run CRUD operations when called
+- add a routes file person.routes and birthCert.routes and export them.
+- during testing once the endpoint is hit the function defined in the routes file will run.
 
 
-Install the necessary dependencies by using 
-- npm install
-
-Create a .env file and store your environment variables there
+NB: This is mostly based on my level of understanding and is not professionally as such there are some functions that were not defined in this reference section.

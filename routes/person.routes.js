@@ -6,5 +6,7 @@ const router = express.Router();
 // handling the requests made
 router.post("/", createPerson);
 
+// The rest of the crud operations work as normal 
+
 const personRoutes = router;
 export default personRoutes
