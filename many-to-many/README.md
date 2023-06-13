@@ -4,19 +4,21 @@ When working with relational databases we need to specify the type of relationsh
 a Many to Many relationship 
 
 ### Tables used in this reference 
-Users and Posts
-A user can have many posts but an individual social media post can only belong to one user.
+Customers and Products
+A customer can have many products and many products can be bought by many customers.
 
-hasOne and belongsTo methods to define the relationship between the two tables
+belongsToMany methods to define the relationship between the two tables
+
+- siblingTable.belongsToMany(siblingTable, {through: "joinTableName"})
+- customer.belongsToMany(product, { through : "customerProducts"});
 
 ##### The process of creating the relationship
 - define the models - {}
 - import it into our dbConn.js file.
 - define the relationship by writhing
     - parent.hasMany(child) - users.hasMany(post)
-        - helper methods add, get, createUser is enabled
-    - child.belongsTo(parent) - posts.belongsTo(Users)
-        - helper methods set,get,createChild is enabled
+- helper methods add, get, createTable is enabled
+    
 - sequelize.sync - sync with the database
 - create the controllers users and posts Controllers and creating functions to run CRUD operations when called
 - create routes files to navigate to the right function.
